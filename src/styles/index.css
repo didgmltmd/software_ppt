@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background: #f0f4f8;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.presentation {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* 슬라이드 기본 */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 64px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== 배경 타입 (파스텔톤) ===== */
+.slide-white {
+  background: linear-gradient(160deg, #ffffff 0%, #f8fbff 50%, #f0f5ff 100%);
+}
+
+.slide-light {
+  background: linear-gradient(160deg, #f5f8ff 0%, #eef4ff 50%, #e8f0fe 100%);
+}
+
+.slide-blue {
+  background: linear-gradient(135deg, #6ba3f7 0%, #4a8af5 40%, #3b7ae8 100%);
+  color: #ffffff;
+}
+
+.slide-dark {
+  background: linear-gradient(135deg, #1a1207 0%, #292011 30%, #1e293b 70%, #0f172a 100%);
+  color: #ffffff;
+}
+
+/* ===== 타이포그래피 ===== */
+.slide-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.slide-blue .slide-title,
+.slide-dark .slide-title {
+  color: #ffffff;
+}
+
+.slide-subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.slide-blue .slide-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.slide-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #334155;
+}
+
+.slide-blue .slide-content,
+.slide-dark .slide-content {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ===== 리스트 ===== */
+.slide-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.slide-content ul li {
+  padding: 6px 0;
+  padding-left: 24px;
+  position: relative;
+}
+
+.slide-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
+  background: #6366f1;
+  border-radius: 50%;
+}
+
+.slide-blue .slide-content ul li::before,
+.slide-dark .slide-content ul li::before {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== 섹션 헤더 ===== */
+.section-header {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-number {
+  font-size: 7rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.12);
+  position: absolute;
+  top: 32px;
+  left: 48px;
+  z-index: 0;
+}
+
+.section-presenter {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ===== 코드 블록 ===== */
+.code-block {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin: 14px 0;
+  border-top: 3px solid #6366f1;
+}
+
+/* ===== 문제-해결 카드 ===== */
+.problem-card {
+  background: #ffffff;
+  border-left: 4px solid;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 8px 0;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+}
+
+.problem-card .label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 3px;
+}
+
+.problem-card .label-problem { color: #ef4444; }
+.problem-card .label-solution { color: #10b981; }
+
+.problem-card:has(.label-problem) { border-left-color: #ef4444; }
+.problem-card:has(.label-solution) { border-left-color: #10b981; }
+
+.problem-card p {
+  font-size: 0.9rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* ===== 다이어그램 ===== */
+.diagram-placeholder {
+  background: rgba(99, 102, 241, 0.04);
+  border: 1.5px solid rgba(99, 102, 241, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: #475569;
+  font-size: 0.9rem;
+  margin: 16px 0;
+}
+
+/* ===== 두 컬럼 ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.two-col > div {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.slide-blue .two-col > div {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== 파이프라인 ===== */
+.pipeline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 14px;
+}
+
+.pipeline-step {
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.pipeline-step.step-blue { background: #eff6ff; color: #1e40af; }
+.pipeline-step.step-purple { background: #f5f3ff; color: #5b21b6; }
+.pipeline-step.step-green { background: #f0fdf4; color: #166534; }
+.pipeline-step.step-orange { background: #fffbeb; color: #92400e; }
+
+.pipeline-arrow { color: #94a3b8; font-size: 1rem; }
+
+/* ===== 플로우 차트 ===== */
+.flow-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.flow-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.flow-box {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.flow-box.primary { background: #1071e5; color: white; }
+.flow-box.secondary { background: #f1f5f9; color: #334155; }
+.flow-box.accent { background: #10b981; color: white; }
+.flow-box.warning { background: #f59e0b; color: white; }
+
+.flow-arrow-down { color: #94a3b8; font-size: 1rem; }
+
+/* ===== 아키텍처 다이어그램 ===== */
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.arch-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.arch-box {
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.arch-box.frontend { background: #06b6d4; color: white; }
+.arch-box.backend { background: #6366f1; color: white; }
+.arch-box.database { background: #f59e0b; color: white; }
+.arch-box.worker { background: #10b981; color: white; }
+.arch-box.storage { background: #ef4444; color: white; }
+
+.arch-arrow { color: #94a3b8; font-size: 1.2rem; }
+.arch-label { font-size: 0.7rem; color: #64748b; margin-top: 4px; }
+
+/* ===== 태그/뱃지 ===== */
+.tech-badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1e40af;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin: 3px;
+}
+
+/* ===== 인트로 ===== */
+.intro-title {
+  font-size: 3.8rem;
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+}
+
+.intro-tagline {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.team-list {
+  font-size: 1rem;
+  line-height: 2.2;
+  opacity: 0.85;
+}
+
+/* ===== 클릭/드래그는 JS에서 처리 ===== */
+
+/* ===== 인디케이터 ===== */
+.slide-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 200;
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #93c5fd;
+  transform: scale(1.4);
+}
+
+/* ===== 슬라이드 번호 ===== */
+.slide-number {
+  position: fixed;
+  bottom: 22px;
+  right: 32px;
+  font-size: 0.8rem;
+  color: rgba(100, 116, 139, 0.6);
+  z-index: 200;
+  font-weight: 500;
+}
+
+/* ===== 배경 파티클 ===== */
+.bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
