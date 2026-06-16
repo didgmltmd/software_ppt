@@ -138,9 +138,10 @@ body {
   font-weight: 900;
   color: rgba(255, 255, 255, 0.12);
   position: absolute;
-  top: 32px;
-  left: 48px;
+  top: -260px;
+  left: -40px;
   z-index: 0;
+  pointer-events: none;
 }
 
 .section-presenter {

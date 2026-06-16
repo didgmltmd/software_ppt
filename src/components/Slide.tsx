@@ -32,7 +32,7 @@ export function Slide({ data, isActive, index }: SlideProps) {
     <div className={`slide ${bgClass} ${extraClass} ${isActive ? 'active' : ''}`}>
       {/* 인트로 슬라이드 배경 */}
       {index === 0 && isActive && <IntroScene />}
-      <div style={{ position: 'relative', zIndex: 1 }} dangerouslySetInnerHTML={{ __html: data.html }} />
+      <div style={{ position: 'relative', zIndex: 1, width: '100%' }} dangerouslySetInnerHTML={{ __html: data.html }} />
       {isActive && DemoComponent && (
         <div style={{ marginTop: 12, flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
           <DemoComponent />
