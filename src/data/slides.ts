@@ -272,14 +272,7 @@ FOR UPDATE SKIP LOCKED;
     type: 'white',
     html: `
       <div class="slide-title">AI 파이프라인 — 어려움과 해결</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="problem-card"><div class="label label-problem">문제 1</div><p>동기 LLM 호출 → 이벤트 루프 차단</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 1</div><p>asyncio.to_thread()로 별도 스레드 실행</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 2</div><p>대용량 레포 → 토큰 초과</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 2</div><p>8만자 제한 + 소스 확장자 필터링</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 3</div><p>LLM이 코드블록으로 감싸서 응답</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 3</div><p>정규식 파싱 fallback 구현</p></div>
-      </div>
+      <div class="slide-subtitle">각 문제를 클릭하고 실행 버튼으로 Before/After를 비교해보세요</div>
     `
   },
 
@@ -321,14 +314,7 @@ FOR UPDATE SKIP LOCKED;
     type: 'white',
     html: `
       <div class="slide-title">학생 화면 — 어려움과 해결</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="problem-card"><div class="label label-problem">문제 1</div><p>3D 원통 캐러셀 → 카드 겹침/짤림</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 1</div><p>슬라이드 방식 전환 (translateX 기반)</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 2</div><p>자동 슬라이드 + 유저 클릭 충돌</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 2</div><p>클릭 시 타이머 리셋 패턴</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 3</div><p>React Query 캐시 무효화 타이밍</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 3</div><p>queryKey 전략으로 정확한 invalidation</p></div>
-      </div>
+      <div class="slide-subtitle">각 문제를 클릭하고 실행 버튼으로 Before/After를 비교해보세요</div>
     `
   },
 
@@ -403,14 +389,7 @@ if (error.response?.status === 401) {<br>
     type: 'white',
     html: `
       <div class="slide-title">관리자 화면 — 어려움과 해결</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div class="problem-card"><div class="label label-problem">문제 1</div><p>레이아웃 max-width 불일치</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 1</div><p>통일 규격 (max-w-7xl) 적용</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 2</div><p>스크롤바 유무로 레이아웃 밀림</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 2</div><p>scrollbar-gutter: stable 적용</p></div>
-        <div class="problem-card"><div class="label label-problem">문제 3</div><p>폼 빌더 Input 단조로움</p></div>
-        <div class="problem-card"><div class="label label-solution">해결 3</div><p>보더 기반 스타일로 전환</p></div>
-      </div>
+      <div class="slide-subtitle">각 문제를 클릭하고 실행 버튼으로 Before/After를 비교해보세요</div>
     `
   },
   // 21: 아웃트로
