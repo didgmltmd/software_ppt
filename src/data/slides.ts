@@ -78,44 +78,12 @@ export const slidesData: SlideData[] = [
       <div class="slide-subtitle">API 서버와 AI 워커를 분리 · Docker Compose로 배포 · GitHub Actions CI/CD</div>
     `
   },
-  // 4: 파트1-4
+  // 4: 파트1-4 인프라 문제해결
   {
     type: 'white',
     html: `
-      <div class="slide-title">DB 설계 & 인프라</div>
-      <div class="slide-content">
-        <div class="two-col">
-          <div>
-            <strong style="color:#1071e5;">Database</strong>
-            <ul>
-              <li>14개 테이블, UUID PK, 네이밍 규칙 prj_/usr_</li>
-              <li>Docker Compose: db + api + worker(x2)</li>
-            </ul>
-          </div>
-          <div>
-            <strong style="color:#6366f1;">CI/CD Pipeline</strong>
-            <div class="pipeline" style="margin-top:8px;">
-              <span class="pipeline-step step-blue">push</span>
-              <span class="pipeline-arrow">→</span>
-              <span class="pipeline-step step-purple">SSH</span>
-              <span class="pipeline-arrow">→</span>
-              <span class="pipeline-step step-orange">git reset</span>
-              <span class="pipeline-arrow">→</span>
-              <span class="pipeline-step step-green">compose up</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:16px;">
-        <div class="problem-card" style="flex:1;">
-          <div class="label label-problem">문제</div>
-          <p>서버 로컬 파일 충돌 / 워커-API 코드 공유</p>
-        </div>
-        <div class="problem-card" style="flex:1;">
-          <div class="label label-solution">해결</div>
-          <p>git reset --hard 동기화 / common/ 모듈 분리</p>
-        </div>
-      </div>
+      <div class="slide-title">인프라 & 배포 — 어려움과 해결</div>
+      <div class="slide-subtitle">각 문제를 클릭하고 실행 버튼으로 Before/After를 비교해보세요</div>
     `
   },
 

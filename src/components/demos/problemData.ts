@@ -309,3 +309,152 @@ body {
     ],
   },
 ]
+
+
+// 슬라이드 4: 인프라/배포 문제해결
+export const infraProblemScenarios = [
+  {
+    problem: 'RDS → EC2 내부 PostgreSQL 전환 시 URL 혼잡',
+    solution: 'Docker 내부 네트워크 + 환경변수 분리',
+    beforeCode: `# 문제: RDS 엔드포인트가 여기저기 하드코딩
+DATABASE_URL = "postgresql://user:pass@
+  my-rds-instance.abc123.ap-northeast-2
+  .rds.amazonaws.com:5432/honeybarrel"
+# EC2 내부로 전환하면서 URL 충돌 발생
+# S3 업로드 URL도 같이 꼬임`,
+    afterCode: `# 해결: Docker 내부 서비스명 + .env 분리
+# docker-compose.yml
+services:
+  db:
+    image: postgres:16
+  api:
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db:5432/honey
+# "db"는 Docker 내부 DNS → 외부 의존 0`,
+    beforeConsole: [
+      '> docker compose up...',
+      '> API 서버 시작...',
+      '> DB 연결 시도: my-rds-instance.abc123...',
+      '❌ Connection refused (RDS 삭제됨)',
+      '❌ S3 업로드 URL도 RDS 기준으로 꼬임',
+      'ERROR: 전체 서비스 기동 실패',
+    ],
+    afterConsole: [
+      '> docker compose up...',
+      '> DB 컨테이너 시작: postgres:16',
+      '> API 서버 시작: DATABASE_URL=...@db:5432',
+      '✅ Docker 내부 네트워크로 연결 성공',
+      '✅ 월 비용: RDS $50 → EC2 내부 $0',
+      'OK: 환경변수 분리로 URL 혼잡 해결',
+    ],
+  },
+  {
+    problem: 'EC2 빌드 시 node_modules로 서버 디스크 풀',
+    solution: 'EBS 볼륨 확장 (8GB → 20GB)',
+    beforeCode: `# 문제: EC2 기본 8GB에서 빌드
+$ npm install
+$ npm run build
+# node_modules: ~800MB
+# .next / dist: ~200MB
+# 시스템 + Docker: ~5GB
+# 총합 > 8GB → 디스크 풀!`,
+    afterCode: `# 해결: EBS 볼륨 확장
+$ aws ec2 modify-volume --size 20
+$ sudo growpart /dev/xvda 1
+$ sudo resize2fs /dev/xvda1
+
+# 대안: .dockerignore에 node_modules 제외
+# 대안: 로컬 빌드 후 dist만 배포
+# → 그냥 볼륨 늘리는 게 가장 간단했음`,
+    beforeConsole: [
+      '> npm install...',
+      '> node_modules: 847MB 설치 완료',
+      '> npm run build...',
+      '❌ ENOSPC: no space left on device',
+      '❌ 디스크 사용량: 7.9GB / 8GB (99%)',
+      'ERROR: 빌드 실패 — 서버 터짐',
+    ],
+    afterConsole: [
+      '> EBS 볼륨 확장: 8GB → 20GB',
+      '> sudo growpart + resize2fs 완료',
+      '> npm install... 847MB OK',
+      '> npm run build... 완료',
+      '> 디스크 사용량: 8.2GB / 20GB (41%)',
+      '✅ 여유 공간 확보 — 정상 빌드',
+    ],
+  },
+  {
+    problem: 'CI/CD 배포 시 파일 권한 오류',
+    solution: 'git reset --hard + compose 재빌드 전략',
+    beforeCode: `# 문제: GitHub Actions에서 SSH 배포
+$ ssh ec2 "cd /app && git pull"
+# error: Your local changes would be
+#        overwritten by merge.
+# 서버에서 직접 수정한 파일이 충돌
+# docker-compose.yml 권한도 꼬임`,
+    afterCode: `# 해결: 강제 동기화 전략
+$ ssh ec2 "cd /app && \\
+  git fetch origin main && \\
+  git reset --hard origin/main && \\
+  docker compose up --build -d && \\
+  docker compose exec api alembic upgrade head"
+# 서버 로컬 변경사항 무시 → 항상 깨끗한 상태`,
+    beforeConsole: [
+      '> GitHub Actions: SSH 접속...',
+      '> cd /app && git pull origin main',
+      '❌ error: local changes would be overwritten',
+      '❌ Aborting merge',
+      '❌ 수동으로 서버 접속해서 해결해야 함',
+      'ERROR: CI/CD 파이프라인 실패',
+    ],
+    afterConsole: [
+      '> GitHub Actions: SSH 접속...',
+      '> git fetch origin main',
+      '> git reset --hard origin/main',
+      '✅ HEAD is now at abc1234',
+      '> docker compose up --build -d',
+      '> alembic upgrade head',
+      '✅ 배포 완료 — 항상 깨끗한 상태',
+    ],
+  },
+  {
+    problem: 'Docker Compose 서비스 간 의존성 순서',
+    solution: 'healthcheck + depends_on condition',
+    beforeCode: `# 문제: API가 DB보다 먼저 시작
+services:
+  api:
+    depends_on:
+      - db  # 단순 순서만 보장, ready 아님
+# DB 초기화 중에 API가 연결 시도 → 실패`,
+    afterCode: `# 해결: healthcheck로 DB ready 확인
+services:
+  db:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 3s
+      retries: 5
+  api:
+    depends_on:
+      db:
+        condition: service_healthy
+# DB가 진짜 ready일 때만 API 시작`,
+    beforeConsole: [
+      '> docker compose up...',
+      '> db: initializing...',
+      '> api: starting (DB 아직 초기화 중)',
+      '> api: connecting to db:5432...',
+      '❌ Connection refused',
+      '❌ api exited with code 1',
+      'ERROR: API 컨테이너 크래시',
+    ],
+    afterConsole: [
+      '> docker compose up...',
+      '> db: initializing...',
+      '> db: healthcheck: pg_isready → waiting...',
+      '> db: healthcheck: pg_isready → healthy ✓',
+      '> api: DB healthy, starting now...',
+      '> api: connected to db:5432',
+      '✅ 모든 서비스 정상 기동',
+    ],
+  },
+]
