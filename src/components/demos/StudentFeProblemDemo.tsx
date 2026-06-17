@@ -101,59 +101,78 @@ function CarouselProblem() {
 
 // ===== 문제 2: 타이머 충돌 =====
 function TimerProblem() {
-  const [showAfter, setShowAfter] = useState(false)
   const [current, setCurrent] = useState(0)
   const [log, setLog] = useState<string[]>([])
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const [isRunning, setIsRunning] = useState(false)
+  const cancelRef = useRef(false)
 
-  const startDemo = (fixed: boolean) => {
-    setShowAfter(fixed)
+  const wait = (ms: number) => new Promise<void>(r => {
+    const id = setTimeout(r, ms)
+    // 취소 가능하게 하진 않지만, 짧은 시간이라 OK
+    void id
+  })
+
+  const startDemo = async (fixed: boolean) => {
+    if (isRunning) return
+    cancelRef.current = false
+    setIsRunning(true)
     setCurrent(0)
     setLog([])
-    if (timerRef.current) clearInterval(timerRef.current)
 
-    timerRef.current = setInterval(() => {
-      setCurrent(prev => {
-        const next = (prev + 1) % 4
-        setLog(l => [...l, `자동: 카드 ${next}으로 이동`])
-        return next
-      })
-    }, 2200)
+    // 자동 슬라이드: 0 → 1
+    await wait(800)
+    if (cancelRef.current) return
+    setCurrent(1)
+    setLog(l => [...l, '자동: 카드 1로 이동'])
 
-    // 유저 클릭 시뮬레이션 (2초 후)
-    setTimeout(() => {
-      if (!fixed) {
-        setCurrent(2)
-        setLog(l => [...l, '👆 유저 클릭: 카드 2'])
-      } else {
-        setCurrent(2)
-        setLog(l => [...l, '👆 유저 클릭: 카드 2 + 타이머 리셋'])
-        if (timerRef.current) clearInterval(timerRef.current)
-        timerRef.current = setInterval(() => {
-          setCurrent(prev => {
-            const next = (prev + 1) % 4
-            setLog(l => [...l, `자동 재개: 카드 ${next}`])
-            return next
-          })
-        }, 2200)
-      }
-    }, 2000)
+    // 자동 슬라이드: 1 → 2
+    await wait(1200)
+    if (cancelRef.current) return
+    setCurrent(2)
+    setLog(l => [...l, '자동: 카드 2로 이동'])
 
-    // 7초 후 정리
-    setTimeout(() => { if (timerRef.current) clearInterval(timerRef.current) }, 7000)
+    // 유저 클릭: 카드 0으로 가고 싶음
+    await wait(1000)
+    if (cancelRef.current) return
+    setCurrent(0)
+    setLog(l => [...l, '👆 유저 클릭: 카드 0으로 이동!'])
+
+    if (!fixed) {
+      // 문제: 바로 자동이 덮어씀
+      await wait(600)
+      if (cancelRef.current) return
+      setCurrent(3)
+      setLog(l => [...l, '❌ 자동이 덮어씀: 카드 3으로 강제 이동'])
+
+      await wait(1000)
+      if (cancelRef.current) return
+      setLog(l => [...l, '❌ 유저 의도 무시됨!'])
+    } else {
+      // 해결: 타이머 리셋 → 유저 의도 유지
+      await wait(600)
+      if (cancelRef.current) return
+      setLog(l => [...l, '✅ 타이머 리셋됨 — 유저 의도 유지'])
+
+      await wait(1500)
+      if (cancelRef.current) return
+      setCurrent(1)
+      setLog(l => [...l, '✅ 자동 재개: 카드 1 (5초 후)'])
+    }
+
+    setIsRunning(false)
   }
 
-  useEffect(() => { return () => { if (timerRef.current) clearInterval(timerRef.current) } }, [])
+  useEffect(() => { return () => { cancelRef.current = true } }, [])
 
   return (
     <div>
       <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-        <button onClick={() => startDemo(false)}
-          style={{ padding: '6px 14px', borderRadius: 6, border: 'none', background: '#ef4444', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
+        <button onClick={() => startDemo(false)} disabled={isRunning}
+          style={{ padding: '6px 14px', borderRadius: 6, border: 'none', background: isRunning ? '#94a3b8' : '#ef4444', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: isRunning ? 'default' : 'pointer' }}>
           ▶ 충돌 시뮬레이션
         </button>
-        <button onClick={() => startDemo(true)}
-          style={{ padding: '6px 14px', borderRadius: 6, border: 'none', background: '#10b981', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>
+        <button onClick={() => startDemo(true)} disabled={isRunning}
+          style={{ padding: '6px 14px', borderRadius: 6, border: 'none', background: isRunning ? '#94a3b8' : '#10b981', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: isRunning ? 'default' : 'pointer' }}>
           ▶ 해결 시뮬레이션
         </button>
       </div>
