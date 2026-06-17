@@ -8,7 +8,8 @@ import { AnalysisPipelineDemo } from './demos/AnalysisPipelineDemo'
 import { ArchitectureDemo } from './demos/ArchitectureDemo'
 import { IntroScene } from './demos/IntroScene'
 import { ProblemSolveDemo } from './demos/ProblemSolveDemo'
-import { aiProblemScenarios, studentFeProblemScenarios, adminFeProblemScenarios } from './demos/problemData'
+import { StudentFeProblemDemo } from './demos/StudentFeProblemDemo'
+import { aiProblemScenarios, adminFeProblemScenarios } from './demos/problemData'
 
 interface SlideProps {
   data: SlideData
@@ -23,7 +24,7 @@ const DEMO_SLIDES: Record<number, () => React.ReactNode> = {
   12: () => <ProblemSolveDemo scenarios={aiProblemScenarios} />,
   14: () => <StepFormDemo />,
   15: () => <CarouselDemo />,
-  16: () => <ProblemSolveDemo scenarios={studentFeProblemScenarios} />,
+  16: () => <StudentFeProblemDemo />,
   18: () => <ButtonDemo />,
   20: () => <ProblemSolveDemo scenarios={adminFeProblemScenarios} />,
 }
