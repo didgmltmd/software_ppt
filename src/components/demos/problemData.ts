@@ -1,25 +1,25 @@
-// 슬라이드 12: AI 파이프라인 문제해결
+﻿// 슬라이드 12: AI 파이프라인 문제해결
 export const aiProblemScenarios = [
   {
     problem: '동기 LLM 호출 → 이벤트 루프 차단',
     solution: 'asyncio.to_thread()로 별도 스레드 실행',
     beforeCode: `# 문제: 동기 호출이 전체 서버를 블로킹
 response = client.chat.completions.create(
-    model="gpt-4",
+    model="Claude 4.5 Haiku",
     messages=[...]
 )
 # 이 동안 다른 요청 처리 불가!`,
     afterCode: `# 해결: to_thread로 블로킹 우회
 response = await asyncio.to_thread(
     client.chat.completions.create,
-    model="gpt-4",
+    model="Claude 4.5 Haiku",
     messages=[...]
 )
 # 다른 코루틴 정상 실행됨!`,
     beforeConsole: [
       '> 워커 시작...',
       '> 파일 처리 중: main.py',
-      '> OpenAI API 호출 (동기)...',
+      '> Bedrock API 호출 (동기)...',
       '❌ 경고: 이벤트 루프 12.3초 차단됨',
       '❌ 다른 요청 타임아웃 발생',
       'ERROR: asyncio 태스크 타임아웃 초과',
@@ -27,7 +27,7 @@ response = await asyncio.to_thread(
     afterConsole: [
       '> 워커 시작...',
       '> 파일 처리 중: main.py',
-      '> OpenAI API 호출 (비동기 스레드)...',
+      '> Bedrock API 호출 (비동기 스레드)...',
       '> [동시] routes.py 처리 중',
       '> [동시] models.py 처리 중',
       '✅ main.py 분석 완료 (3.2초)',
@@ -55,7 +55,7 @@ for f in sorted_files:
       '> 2,847개 파일 발견 (node_modules 포함)',
       '> 총 글자수: 14,200,000',
       '❌ ERROR: 토큰 제한 초과 (128k)',
-      'ERROR: OpenAI API 400 에러 반환',
+      'ERROR: Bedrock API 400 에러 반환',
     ],
     afterConsole: [
       '> 레포지토리 스캔 중...',

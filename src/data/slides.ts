@@ -1,4 +1,4 @@
-export interface SlideData {
+﻿export interface SlideData {
   type: 'blue' | 'white' | 'light' | 'dark'
   className?: string
   html: string
@@ -224,7 +224,7 @@ useAuthStore.getState().setToken(newToken, role);
       <div class="section-presenter">발표자: 최국진</div>
       <div class="slide-content" style="margin-top:24px; text-align:center;">
         <ul style="display:inline-block; text-align:left;">
-          <li>OpenAI API + Map-Reduce 분석 패턴</li>
+          <li>Bedrock API + Map-Reduce 분석 패턴</li>
           <li>PostgreSQL FOR UPDATE SKIP LOCKED 큐</li>
           <li>Docker 워커 x2 수평 확장</li>
         </ul>
@@ -438,7 +438,7 @@ if (error.response?.status === 401) {<br>
           <div style="border-top:3px solid #f59e0b;">
             <strong style="color:#f59e0b;">AI 분석 정확도 향상</strong>
             <ul>
-              <li>GPT-4o 업그레이드 + 프롬프트 최적화</li>
+              <li>Claude 4.5 Haiku 업그레이드 + 프롬프트 최적화</li>
               <li>코드 품질 점수 산정 알고리즘 개선</li>
               <li>다국어 코드 주석 지원</li>
             </ul>

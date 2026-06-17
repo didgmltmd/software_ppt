@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 
 export function ArchitectureDemo() {
   return (
@@ -16,7 +16,7 @@ export function ArchitectureDemo() {
 
       {/* EC2 내부 */}
       <Node icon="⚡" label="FastAPI" sub="Python 3.11 · Async" color="#6366f1" x={280} y={70} delay={0.1} />
-      <Node icon="🤖" label="AI Worker ×2" sub="OpenAI · Map-Reduce" color="#10b981" x={280} y={170} delay={0.2} />
+      <Node icon="🤖" label="AI Worker ×2" sub="Bedrock · Map-Reduce" color="#10b981" x={280} y={170} delay={0.2} />
       <Node icon="🗄️" label="PostgreSQL 16" sub="14 Tables · UUID PK" color="#3b82f6" x={280} y={270} delay={0.3} />
 
       {/* EC2 밖 — 왼쪽: 클라이언트 */}

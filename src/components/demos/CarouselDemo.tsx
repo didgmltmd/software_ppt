@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const mockProjects = [
-  { id: 1, title: 'AI 챗봇 플랫폼', team: '김철수 외 3명', tech: 'React, FastAPI, GPT-4', category: '인공지능', color: '#6366f1' },
+  { id: 1, title: 'AI 챗봇 플랫폼', team: '김철수 외 3명', tech: 'React, FastAPI, Claude 4.5 Haiku', category: '인공지능', color: '#6366f1' },
   { id: 2, title: '스마트 출석 시스템', team: '이영희 외 2명', tech: 'Flutter, Firebase', category: 'IoT', color: '#10b981' },
   { id: 3, title: '실시간 협업 에디터', team: '박준호 외 4명', tech: 'Next.js, WebSocket', category: '웹', color: '#1071e5' },
   { id: 4, title: '블록체인 투표', team: '최민지 외 2명', tech: 'Solidity, React', category: '블록체인', color: '#f59e0b' },
