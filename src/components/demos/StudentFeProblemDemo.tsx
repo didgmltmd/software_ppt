@@ -118,14 +118,13 @@ function TimerProblem() {
         setLog(l => [...l, `자동: 카드 ${next}으로 이동`])
         return next
       })
-    }, 1500)
+    }, 2200)
 
-    // 유저 클릭 시뮬레이션 (1초 후)
+    // 유저 클릭 시뮬레이션 (2초 후)
     setTimeout(() => {
       if (!fixed) {
         setCurrent(2)
         setLog(l => [...l, '👆 유저 클릭: 카드 2'])
-        // 바로 자동이 덮어씀 (fixed가 아닐 때)
       } else {
         setCurrent(2)
         setLog(l => [...l, '👆 유저 클릭: 카드 2 + 타이머 리셋'])
@@ -136,12 +135,12 @@ function TimerProblem() {
             setLog(l => [...l, `자동 재개: 카드 ${next}`])
             return next
           })
-        }, 1500)
+        }, 2200)
       }
-    }, 1000)
+    }, 2000)
 
-    // 3초 후 정리
-    setTimeout(() => { if (timerRef.current) clearInterval(timerRef.current) }, 4500)
+    // 7초 후 정리
+    setTimeout(() => { if (timerRef.current) clearInterval(timerRef.current) }, 7000)
   }
 
   useEffect(() => { return () => { if (timerRef.current) clearInterval(timerRef.current) } }, [])

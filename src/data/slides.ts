@@ -392,18 +392,76 @@ if (error.response?.status === 401) {<br>
       <div class="slide-subtitle">각 문제를 클릭하고 실행 버튼으로 Before/After를 비교해보세요</div>
     `
   },
-  // 21: 아웃트로
+  // 21: 시연 페이지
   {
     type: 'dark',
     className: 'section-header',
     html: `
-      <div class="slide-title" style="font-size:3rem;">감사합니다</div>
-      <div class="slide-subtitle" style="color:rgba(255,255,255,0.7); margin-top:20px;">시연 영상 / 라이브 데모</div>
-      <div class="slide-content" style="text-align:center; margin-top:24px;">
-        <strong style="color:#93c5fd;">향후 개선점</strong><br><br>
-        <span style="opacity:0.7;">알림 시스템 · 모바일 반응형 강화 · 분석 정확도 향상</span>
+      <div class="slide-title" style="font-size:2.6rem; margin-bottom:24px;">라이브 시연</div>
+      <div style="margin: 20px auto; padding: 24px 40px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; display: inline-block; backdrop-filter: blur(8px);">
+        <div style="font-size:0.8rem; color:rgba(255,255,255,0.5); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">배포 URL</div>
+        <a href="http://54.180.133.241:5173" target="_blank" style="font-size:1.6rem; color:#93c5fd; text-decoration:none; font-weight:700; letter-spacing:-0.02em;">
+          http://54.180.133.241:5173
+        </a>
       </div>
-      <div class="section-presenter" style="margin-top:40px; font-size:1.2rem;">Q & A</div>
+      <div class="slide-content" style="margin-top:28px; text-align:center; opacity:0.7; font-size:1rem;">
+        관리자 로그인 → 폼 생성 → 학생 제출 → AI 분석 → 명예의 전당
+      </div>
+    `
+  },
+  // 22: 향후 개선점
+  {
+    type: 'light',
+    html: `
+      <div class="slide-title">향후 개선점</div>
+      <div class="slide-subtitle">다음 학기 고도화 계획</div>
+      <div class="slide-content">
+        <div class="two-col">
+          <div style="border-top:3px solid #6366f1;">
+            <strong style="color:#6366f1;">포트폴리오 자동 생성</strong>
+            <ul>
+              <li>학생 제출물을 개인 포트폴리오로 자동 변환</li>
+              <li>기술 스택·분석 결과 기반 이력서 연동</li>
+              <li>외부 공유 링크 생성 기능</li>
+            </ul>
+          </div>
+          <div style="border-top:3px solid #10b981;">
+            <strong style="color:#10b981;">실시간 알림 시스템</strong>
+            <ul>
+              <li>AI 분석 완료 시 학생에게 즉시 알림</li>
+              <li>WebSocket 기반 실시간 상태 업데이트</li>
+              <li>이메일/Slack 연동 알림 채널</li>
+            </ul>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top:16px;">
+          <div style="border-top:3px solid #f59e0b;">
+            <strong style="color:#f59e0b;">AI 분석 정확도 향상</strong>
+            <ul>
+              <li>GPT-4o 업그레이드 + 프롬프트 최적화</li>
+              <li>코드 품질 점수 산정 알고리즘 개선</li>
+              <li>다국어 코드 주석 지원</li>
+            </ul>
+          </div>
+          <div style="border-top:3px solid #06b6d4;">
+            <strong style="color:#06b6d4;">모바일 반응형 강화</strong>
+            <ul>
+              <li>모바일 전용 제출 UI</li>
+              <li>PWA 지원으로 오프라인 접근</li>
+              <li>터치 제스처 기반 갤러리 탐색</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  // 23: 아웃트로
+  {
+    type: 'dark',
+    className: 'section-header',
+    html: `
+      <div class="slide-title" style="font-size:3.5rem; background:linear-gradient(135deg, #fbbf24, #f59e0b); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">감사합니다</div>
+      <div class="section-presenter" style="margin-top:40px; font-size:1.3rem; color:rgba(255,255,255,0.5);">Q & A</div>
     `
   }
 ]

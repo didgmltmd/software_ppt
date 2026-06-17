@@ -9,7 +9,8 @@ import { ArchitectureDemo } from './demos/ArchitectureDemo'
 import { IntroScene } from './demos/IntroScene'
 import { ProblemSolveDemo } from './demos/ProblemSolveDemo'
 import { StudentFeProblemDemo } from './demos/StudentFeProblemDemo'
-import { aiProblemScenarios, adminFeProblemScenarios } from './demos/problemData'
+import { AdminFeProblemDemo } from './demos/AdminFeProblemDemo'
+import { aiProblemScenarios } from './demos/problemData'
 
 interface SlideProps {
   data: SlideData
@@ -26,7 +27,7 @@ const DEMO_SLIDES: Record<number, () => React.ReactNode> = {
   15: () => <CarouselDemo />,
   16: () => <StudentFeProblemDemo />,
   18: () => <ButtonDemo />,
-  20: () => <ProblemSolveDemo scenarios={adminFeProblemScenarios} />,
+  20: () => <AdminFeProblemDemo />,
 }
 
 export function Slide({ data, isActive, index }: SlideProps) {
