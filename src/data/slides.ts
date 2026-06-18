@@ -169,16 +169,6 @@ useAuthStore.getState().setToken(newToken, role);
           </div>
         </div>
       </div>
-      <div style="display:flex; gap:12px; margin-top:16px;">
-        <div class="problem-card" style="flex:1;">
-          <div class="label label-problem">문제</div>
-          <p>SameSite 쿠키 이슈 / 비동기 세션</p>
-        </div>
-        <div class="problem-card" style="flex:1;">
-          <div class="label label-solution">해결</div>
-          <p>환경 설정 분리 / async_session 매니저</p>
-        </div>
-      </div>
     `
   },
 
