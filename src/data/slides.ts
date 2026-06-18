@@ -25,7 +25,7 @@ export const slidesData: SlideData[] = [
     className: 'section-header',
     html: `
       <div class="section-number">01</div>
-      <div class="slide-title">프로젝트 배경 및 목적</div>
+      <div class="slide-title">프로젝트 소개 + 시스템 아키텍처</div>
       <div class="section-presenter">발표자: 양희승 (팀장)</div>
       <div class="slide-content" style="margin-top:24px; text-align:center;">
         <ul style="display:inline-block; text-align:left;">

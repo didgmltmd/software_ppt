@@ -417,44 +417,4 @@ $ ssh ec2 "cd /app && \\
       '✅ 배포 완료 — 항상 깨끗한 상태',
     ],
   },
-  {
-    problem: 'Docker Compose 서비스 간 의존성 순서',
-    solution: 'healthcheck + depends_on condition',
-    beforeCode: `# 문제: API가 DB보다 먼저 시작
-services:
-  api:
-    depends_on:
-      - db  # 단순 순서만 보장, ready 아님
-# DB 초기화 중에 API가 연결 시도 → 실패`,
-    afterCode: `# 해결: healthcheck로 DB ready 확인
-services:
-  db:
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user"]
-      interval: 3s
-      retries: 5
-  api:
-    depends_on:
-      db:
-        condition: service_healthy
-# DB가 진짜 ready일 때만 API 시작`,
-    beforeConsole: [
-      '> docker compose up...',
-      '> db: initializing...',
-      '> api: starting (DB 아직 초기화 중)',
-      '> api: connecting to db:5432...',
-      '❌ Connection refused',
-      '❌ api exited with code 1',
-      'ERROR: API 컨테이너 크래시',
-    ],
-    afterConsole: [
-      '> docker compose up...',
-      '> db: initializing...',
-      '> db: healthcheck: pg_isready → waiting...',
-      '> db: healthcheck: pg_isready → healthy ✓',
-      '> api: DB healthy, starting now...',
-      '> api: connected to db:5432',
-      '✅ 모든 서비스 정상 기동',
-    ],
-  },
 ]
