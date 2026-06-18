@@ -42,29 +42,50 @@ export const slidesData: SlideData[] = [
     html: `
       <div class="slide-title">핵심 기능 요약</div>
       <div class="slide-subtitle">하나의 플랫폼에서 제출부터 전시까지</div>
-      <div class="slide-content">
-        <div class="two-col">
-          <div>
-            <strong style="color:#1071e5;">관리자</strong>
-            <ul>
-              <li>제출 폼 설계, 학생 관리</li>
-              <li>AI 분석 결과 확인</li>
-            </ul>
-            <strong style="color:#6366f1; margin-top:8px; display:block;">학생</strong>
-            <ul>
-              <li>GitHub/파일 제출, 기술 스택 태깅</li>
-            </ul>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;">
+        <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe); border-radius:14px; padding:20px; border:1px solid #bfdbfe;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#1071e5;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👨‍💼</div>
+            <strong style="color:#1e40af; font-size:1.1rem;">관리자</strong>
           </div>
-          <div>
-            <strong style="color:#10b981;">AI 분석</strong>
-            <ul>
-              <li>소스코드 자동 분석 (파일별 + 전체 요약)</li>
-            </ul>
-            <strong style="color:#f59e0b; margin-top:8px; display:block;">갤러리</strong>
-            <ul>
-              <li>명예의 전당, 프로젝트 열람, 댓글</li>
-            </ul>
+          <ul style="list-style:none;padding:0;font-size:0.95rem;color:#334155;line-height:2;">
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>제출 폼 설계 (다이나믹 필드)</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>학생/화이트리스트 관리</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>AI 분석 결과 + 소스코드 탐색</li>
+          </ul>
+        </div>
+        <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe); border-radius:14px; padding:20px; border:1px solid #c4b5fd;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#6366f1;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">👨‍🎓</div>
+            <strong style="color:#5b21b6; font-size:1.1rem;">학생</strong>
           </div>
+          <ul style="list-style:none;padding:0;font-size:0.95rem;color:#334155;line-height:2;">
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>GitHub URL / ZIP 파일 제출</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>기술 스택 태깅 (8개 카테고리)</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>팀원 등록 + 스크린샷 업로드</li>
+          </ul>
+        </div>
+        <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7); border-radius:14px; padding:20px; border:1px solid #86efac;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#10b981;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🤖</div>
+            <strong style="color:#166534; font-size:1.1rem;">AI 분석</strong>
+          </div>
+          <ul style="list-style:none;padding:0;font-size:0.95rem;color:#334155;line-height:2;">
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>파일별 Map 분석 (분류/요약/점수)</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>전체 Reduce 종합 (아키텍처 분석)</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>Bedrock Claude 4.5 Haiku</li>
+          </ul>
+        </div>
+        <div style="background:linear-gradient(135deg,#fffbeb,#fef3c7); border-radius:14px; padding:20px; border:1px solid #fcd34d;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🏆</div>
+            <strong style="color:#92400e; font-size:1.1rem;">갤러리</strong>
+          </div>
+          <ul style="list-style:none;padding:0;font-size:0.95rem;color:#334155;line-height:2;">
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>명예의 전당 (3D 캐러셀)</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>프로젝트 상세 열람</li>
+            <li style="padding-left:16px;position:relative;"><span style="position:absolute;left:0;">•</span>댓글 + 기술 스택 필터</li>
+          </ul>
         </div>
       </div>
     `
