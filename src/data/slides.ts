@@ -29,9 +29,9 @@ export const slidesData: SlideData[] = [
       <div class="section-presenter">발표자: 양희승 (팀장)</div>
       <div class="slide-content" style="margin-top:24px; text-align:center;">
         <ul style="display:inline-block; text-align:left;">
-          <li>이메일/USB 제출 — 누락, 버전 혼동</li>
-          <li>수동 코드 검토 — 시간 부족, 일관성 없음</li>
-          <li>포트폴리오 공유 채널 부재</li>
+          <li>기말/해커톤 프로젝트 → 제출 후 버려짐</li>
+          <li>학과 차원의 디지털 자산으로 활용할 수 없을까?</li>
+          <li>대외 홍보 + 명예의 전당으로 학과 브랜딩</li>
         </ul>
       </div>
     `
